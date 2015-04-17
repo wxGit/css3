@@ -16,11 +16,11 @@ $(function(){
         $(d).clone().appendTo(".snowbg").css({
             left:e+"px",
             opacity:o,
-            "font-size":fon,
+            "font-size":fon
         }).animate({
             top:"400px",
             left:l+"px",
-            opacity:0.1,
+            opacity:0.1
         },k,"linear",function(){$(this).remove()})
     },200)
 })

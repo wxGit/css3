@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>改变背景</title>
+<head>
+    <style>
+        div
+          {
+              width:200px;
+              height:200px;
+              background:red;
+              margin-top: 80px;
+              margin-left: 200px;
+          }
+        #div1:hover{
+            animation:myfirst 3s infinite;
+            -moz-animation:myfirst 3s infinite; /* Firefox */
+            -webkit-animation:myfirst 3s infinite; /* Safari and Chrome */
+            -o-animation:myfirst 3s infinite; /* Opera */
+        }
+
+        @keyframes myfirst
+        {
+            from {background:red;}
+            to {background:yellow;}
+        }
+
+        @-moz-keyframes myfirst /* Firefox */
+        {
+            from {background:red;}
+            to {background:yellow;}
+        }
+
+        @-webkit-keyframes myfirst /* Safari and Chrome */
+        {
+            from {background:red;}
+            to {background:yellow;}
+        }
+
+        @-o-keyframes myfirst /* Opera */
+        {
+            from {background:red;}
+            to {background:yellow;}
+        }
+
+
+        #div2
+        {
+            animation:mysecond 5s infinite;
+            -moz-animation:mysecond 5s infinite; /* Firefox */
+            -webkit-animation:mysecond 5s infinite; /* Safari and Chrome */
+            -o-animation:mysecond 5s infinite; /* Opera */
+        }
+
+        @keyframes mysecond
+        {
+            0%   {background:red;}
+            25%  {background:yellow;}
+            50%  {background:blue;}
+            100% {background:green;}
+        }
+
+        @-moz-keyframes mysecond /* Firefox */
+        {
+            0%   {background:red;}
+            25%  {background:yellow;}
+            50%  {background:blue;}
+            100% {background:green;}
+        }
+
+        @-webkit-keyframes mysecond /* Safari and Chrome */
+        {
+            0%   {background:red;}
+            25%  {background:yellow;}
+            50%  {background:blue;}
+            100% {background:green;}
+        }
+
+        @-o-keyframes mysecond /* Opera */
+        {
+            0%   {background:red;}
+            25%  {background:yellow;}
+            50%  {background:blue;}
+            100% {background:green;}
+        }
+    </style>
+</head>
+<body>
+
+<div id="div1"></div>
+<div id="div2"></div>
+
+</body>
+</html>
