@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>css3 animation实现DIV旋转动画效果</title>
+
+    <style>
+
+        .aimateStyle{
+
+            border:1px solid black;
+
+            width:300px;
+
+            height:300px;
+
+            background:#abcdef;
+
+            position:relative;
+
+            top:150px;
+
+            left:200px;
+
+        }
+
+        .active{
+
+            border:1px solid black;
+
+            width:200px;
+
+            height:150px;
+
+            background:#f9c;
+
+        }
+
+        @keyframes aixuexi{
+
+            0%{-webkit-transform:rotate(0deg);opacity:0;}
+
+            50%{-webkit-transform:rotate(90deg);opacity:1;}
+
+            70%{-webkit-transform:rotate(180deg);opacity:1;}
+
+            100%{-webkit-transform:rotate(270deg);opacity:0;}
+
+        }
+
+        @-webkit-keyframes aixuexi{
+
+            0%{-webkit-transform:rotate(0deg);opacity:0;}
+
+            50%{-webkit-transform:rotate(90deg);opacity:1;}
+
+            70%{-webkit-transform:rotate(180deg);opacity:1;}
+
+            100%{-webkit-transform:rotate(270deg);opacity:0;}
+
+        }
+
+        @-moz-keyframes aixuexi{
+
+            0%{-webkit-transform:rotate(0deg);opacity:0;}
+
+            50%{-webkit-transform:rotate(90deg);opacity:1;}
+
+            70%{-webkit-transform:rotate(180deg);opacity:1;}
+
+            100%{-webkit-transform:rotate(270deg);opacity:0;}
+
+        }
+
+        @-o-keyframes aixuexi{
+
+            0%{-webkit-transform:rotate(0deg);opacity:0;}
+
+            50%{-webkit-transform:rotate(90deg);opacity:1;}
+
+            70%{-webkit-transform:rotate(180deg);opacity:1;}
+
+            100%{-webkit-transform:rotate(270deg);opacity:0;}
+
+        }
+
+        #animations {
+
+            border: 2px solid black;
+
+            width: 200px;
+
+            height: 150px;
+
+            background: #f9c;
+
+            margin: -50px auto 0;
+
+            -webkit-animation-name: aixuexi;
+
+            -webkit-animation-duration: 1.5s;
+
+            -webkit-animation-iteration-count: infinite;
+
+            -webkit-animation-timing-function: linear;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="aimateStyle">
+
+    <div id="animations">
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
