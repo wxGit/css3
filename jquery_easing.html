@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jquery  easing 动画演示</title>
+	<style type="text/css">
+         body{
+         	padding:200px;
+         }
+
+         .aa,.bb,.cc,.dd{
+         	width:300px;
+         	background:#09f;
+         	height: 40px;
+         	padding:5px;
+         	color: #fff;
+         	line-height: 40px;
+         	text-align: center;
+         	margin-bottom:10px;
+         	cursor:pointer;
+         }
+	</style>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.easing.js"></script>
+</head>
+<body>
+	<div class="aa">点击这里查看普通效果跟下面对比</div>
+	<div class="bb">使用 easeInOutCirc 的缓冲过渡效果</div>
+	<div class="cc">easeInQuint 效果 + 回调函数</div>
+	<div class="dd">hide() 方法缓冲消失</div>
+	
+	<script type="text/javascript">
+        $(function(){
+			$('.aa').click(function(){
+				$(this).animate({
+					'width':'1000'
+				},1000).animate({
+					'width':'300'
+				},1000);
+				$('.bb').animate({'width':'1000'},{duration:1000,easing:'easeInOutCirc'}).animate({'width':'300'},{duration:1000,easing:'easeInOutCirc'});
+				$('.cc').animate({'width':'1000'},{duration:1000,easing:'easeInQuint'}).animate({'width':'300'},{duration:1000,easing:'easeInQuint',complete:function(){ alert('滑回来了'); }});
+				$('.dd').hide({duration:1000,easing:'easeInQuint'}).show({duration:1000,easing:'easeInQuint'});
+			});
+			$('.bb').click(function(){
+				$(this).animate({'width':'1000'},{duration:1000,easing:'easeInOutCirc'}).animate({'width':'300'},{duration:1000,easing:'easeInOutCirc'});
+			});
+			$('.cc').click(function(){
+				$(this).animate({'width':'1000'},{duration:1000,easing:'easeInQuint'}).animate({'width':'300'},{duration:1000,easing:'easeInQuint',complete:function(){ alert('我是回调函数~'); }});
+			});
+			$('.dd').click(function(){
+			  $(this).hide({duration:1000,easing:'easeOutBack'}).show({duration:1000,easing:'easeInBounce'});
+			});
+	   });
+	</script>
+</body>
+</html>
