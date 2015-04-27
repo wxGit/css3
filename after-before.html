@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            background:#425A6C;
+        }
+        #btn{
+            width: 450px;
+            margin: 150px auto;
+        }
+        a{
+            font-size:40px;
+            margin-right: 60px;
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+            outline: none;
+            transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            -moz-transition: all 0.5s;
+            -o-transition: all 0.5s;
+        }
+        a:hover{
+            color:#fff;
+        }
+        a:hover::before, a:hover::after {
+            position: absolute;
+        }
+        a:hover::before {
+            content: "\5B";
+            left: -30px;
+            color: yellow;
+        }
+        a:hover::after {
+            content: "\5D";
+            right:  -30px;
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+<div id="btn">
+   <a href="#">WAFTURE</a>
+   <a href="#">SUMPTUOUS</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+﻿<html>
+<head>
+<!--整个框架依赖的JS文件-->
+<script src="zepto.min.js"></script>
+<!--当前组件依赖的JS文件-->
+<script src="one.all.min.js"></script>
+<!--当前组件依赖的CSS文件-->
+<link href="radioButton.css" rel="stylesheet">
+
+<title></title>
+
+<script>
+  $(function(){
+       //初始化组件
+        var radio1= one.ui.radioButton(".radio");
+     
+       //设置第四个选中
+        radio1.setCheck(0,true);
+     
+       //设置第四个有效
+        //radio1.setDisable(3,false);//索引是3
+     
+       //设置第四个无效同时第一个选中
+    
+ })
+     
+</script>
+
+</head>
+<body>
+<div class="top">Radio Button 单选框演示</div>
+    <div style="padding:10px;">
+        <label class="one_radio-button radio">
+            <input type="radio" name="r"  value="1">
+            <div class="one_radio-button__checkmark"></div>
+            <span>男</span>
+        </label>
+        <label class="one_radio-button radio">
+            <input type="radio" name="r"  value="2">
+            <div class="one_radio-button__checkmark"></div>
+            <span>女</span>
+        </label>
+            
+    </div>
+
+</body>
+</html>
