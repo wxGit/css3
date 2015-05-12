@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>js拖拽组件-组件形式</title>
+<style>
+  body{ padding:0; margin:0;}
+  #div1{ width:100px; height:100px; background:red; position:absolute; left:0; top:0;}
+  #div2{ width:100px; height:100px; background:yellow; position:absolute; left:100px; top:0;}
+  #div3{ width:100px; height:100px; background:blue; position:absolute; left:200px; top:0;}
+</style>
+<script>
+window.onload = function (){
+	var drag1 = new Drag('div1');
+	drag1.init({
+	   toDown:function(){
+		  document.title = '呵呵';   
+	   }
+	});
+	
+	var drag2 = new Drag('div2');
+	drag2.init({
+	   toDown:function(){
+		  document.title = '嘻嘻';   
+	   },
+	   toUp:function(){
+		  document.title = 'byebye'   
+	   }
+	});
+	
+	var drag3 = new Drag('div3');
+	drag3.init({
+	   toUp:function(){
+		  document.title = '走了！！'   
+	   }
+	});
+
+};
+    //封装成构造函数，将全局的变量变为属性
+    function Drag(id){
+	   	this.obj = document.getElementById(id);
+		this.disX = 0;
+		this.disY = 0;
+		//默认参数
+		this.setting = {
+		   toDown:function(){},
+		   toUp:function(){}
+		}
+    }
+	
+	//将所有的函数加到构造函数的原型上
+	Drag.prototype.init = function(opt){
+		var This = this;
+		extend(this.setting,opt);
+		this.obj.onmousedown = function(e){
+		    var e = e || event;
+			This.setting.toDown();
+			This.mouseDown(e);
+	
+			// 阻止默认事件
+			return false;	
+		}
+	};
+	Drag.prototype.mouseDown = function(e){
+	   var This = this;
+	   this.disX = e.clientX - this.obj.offsetLeft;
+	   this.disY = e.clientY - this.obj.offsetTop;
+	   
+	   document.onmousemove = function(e){
+		   var e = e || window.event;
+		   This.mouseMove(e);
+	   };
+	   document.onmouseup = function(){
+		   This.setting.toUp();
+		   This.mouseUp();  
+	   };
+	};
+	Drag.prototype.mouseMove = function(e){
+	   this.obj.style.left = e.clientX - this.disX + 'px';
+	   this.obj.style.top = e.clientY - this.disY + 'px';
+	};
+	Drag.prototype.mouseUp = function(){
+	   document.onmousemove = null;
+       document.onmouseup = null;
+	};
+	
+	function extend(obj1,obj2){
+	   for(var attr in obj2){
+		  obj1[attr] = obj2[attr];
+	   }	
+    }
+</script>
+</head>
+
+<body>
+
+   <div id="div1"></div>
+   <div id="div2"></div>
+   <div id="div3"></div>
+</body>
+</html>

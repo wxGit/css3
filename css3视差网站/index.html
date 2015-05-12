@@ -1,0 +1,264 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>js实现html视差特效</title>
+<script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<!--<script src="js/swfobject_modified.js" type="text/javascript"></script>-->
+<style>
+/*animate*/
+@-webkit-keyframes sf{
+	0%{
+		opacity:0;
+		-webkit-transform:scale(0.1);
+	}
+	50%{
+       opacity:1;
+  	}
+	
+}
+@-moz-keyframes sf{
+	0%{
+		opacity:0;	
+		-moz-transform:scale(0.1);
+	}
+	50%{
+       opacity:1;
+	}
+}
+
+@keyframes sf{
+	0%{
+		opacity:0; 
+		transform:scale(0.1);
+	}
+    50%{
+		opacity:1;
+	}	
+}
+*{ margin:0; padding:0}
+ul{
+	list-style:none;
+}
+.bg{
+	position:relative;
+	width:100%;
+	height:1000px;
+	overflow:hidden;
+	background-size:cover;
+	background-attachment:fixed;
+	background-repeat:no-repeat;
+	background-position:center center;
+}
+.bg-1{
+	background-image:url(ife.jpg);
+}
+.bg-2{
+	background-image:url(ife1.jpg);
+}
+.bg-3{
+	background-image:url(ifei3.jpg);
+}
+.bg-4{
+	background-image:url(ifei4.jpg);
+}
+.bg-5{
+	background-image:url(ifei5.jpg);
+}
+
+.btn{
+	position:fixed;
+	right:10px;
+	top:350px;
+}
+.btn ul li{
+	margin-bottom:10px;
+}
+.btn ul li a{
+	display:block;
+	background:#FFF;
+	width:10px;
+	height:10px;
+	border:3px solid #FFF;
+	border-radius:10px;
+	overflow:hidden;
+	text-indent:9999px;
+}
+.btn ul li a:hover{
+	border:3px solid #F00;
+	background:#FFF;
+}
+.btn ul li.selected a{
+	background-color:#F00;
+	border:3px solid #F00;
+}
+.nav1{
+	position:relative;
+	left:33%;
+	top:20%;
+}
+.content .nav1 h2{
+	color:#fff;
+	font-size:60px;
+	animation:sf 3s ease-in-out forwards;
+	-moz-animation:sf 3s ease-in-out forwards;
+	-webkit-animation:sf 3s ease-in-out forwards;
+}
+.nav2{
+	position:absolute;
+	top:50px;
+	left:-500px;
+	transition-duration:3s;
+	-webkit-transition-duration:3s;
+	-moz-transition-duration:3s;
+	-o-transition-duration:3s;
+}
+.content .nav2{
+    top:50px;
+    left:1px;
+}
+.content .nav2 h3{
+    width:100px;
+	height:40px;
+	margin-bottom:15px;
+	text-align:center;
+	line-height:40px;
+	color:#3C0000;
+	border:1px solid #3C0000;
+	transition:width 1s;
+	-webkit-transition:width 1s;
+	-moz-transition:width 1s;
+	-o-transition:width 1s;
+}
+.content .nav2 h3:hover{
+	width:150px;
+	cursor:pointer;
+    color:#fff;
+	background:#3C0000;
+}
+
+.tnav1{
+	position:absolute;
+	top:500px;
+	left:-500px;
+	transition-duration:2s;
+	-moz-transition-duration:2s;
+	-webkit-transition-duration:2s;
+}
+.content .tnav1{
+	left:60px;
+	top:500px;
+}
+.tnav2{
+	position:absolute;
+	left:-2000px;
+	bottom:350px;
+	transition-duration:1s;
+	-moz-transition-duration:1s;
+	-webkit-transition-duration:1s;;
+}
+.content .tnav2{
+	left:20px;
+	bottom:350px;
+}
+.tnav3{
+	color:#fff;
+	font-family:"宋体";
+	font-size:28px;
+	position:absolute;
+	left:450px;
+	top:1100px;
+	transition-duration:2s;
+	-moz-transition-duration:2s;
+	-webkit-transition-duration:2s;;
+}
+.content .tnav3{
+	left:450px;
+	top:200px;
+}
+
+</style>
+</head>
+
+<body>
+   
+  <div class="bg bg-1" id="one">    
+    <div class="nav1">
+       <h2>寒江雪.山水.古木生</h2>
+    </div>
+      
+    <div class="nav2">
+       <h3>蜻蜓FM</h3>
+       <h3>豆瓣FM</h3>
+       <h3>心理FM</h3>
+       <h3>荔枝FM</h3>
+    </div>    
+  </div>
+   
+   
+  <div class="bg bg-2" id="two">
+     <div class="tnav1">
+         <img src="logo.png" width="170" height="110" />
+     </div>
+
+     <div class="tnav3">
+         <h1>豆瓣君的doubi史</h1>
+     </div>
+  </div>
+  <div class="bg bg-3" id="three">      
+     
+  </div>
+  <div class="bg bg-4" id="four">           
+     <div class="tnav2">
+        <img src="jing.fm.png" width="368" height="318" />
+     </div>    
+  </div>
+  <div class="bg bg-5" id="five">
+     
+  </div>
+   
+   <!--按钮区域-->
+  <div class="btn">
+    <ul>
+      <li class="selected"><a href="javascript:void(0)">1</a></li>
+      <li><a href="javascript:void(0)">2</a></li>
+      <li><a href="javascript:void(0)">3</a></li>
+      <li><a href="javascript:void(0)">4</a></li>
+      <li><a href="javascript:void(0)">5</a></li>
+    </ul> 
+  </div> 
+  <script>
+$(document).ready(function() {
+		  var obg = $('.bg').height();
+		  var vLen = 0;
+		  var oscrolltop;
+		  $('#one').addClass('content');
+		  $(window).scroll(function(){
+			    oscrolltop = $(window).scrollTop();
+				var num = Math.floor(oscrolltop/obg);
+				$(".btn li:eq("+num+")").addClass('selected').siblings('li').removeClass('selected');
+                $('.bg').eq(num).addClass('content').siblings('.bg').removeClass('content');
+			  });
+			  
+			$('.btn li').click(function(){
+				if($(this).index()==0){
+					$('body').animate({scrollTop:$('#one').offset().top},2000);
+				}
+				else if($(this).index()==1){
+					$('body').animate({scrollTop:$('#two').offset().top},2000);					
+					}
+				else if($(this).index()==2){
+					$('body').animate({scrollTop:$('#three').offset().top},2000);	
+					}
+			    else if($(this).index()==3){
+					$('body').animate({scrollTop:$('#four').offset().top},2000);
+			        }
+				else{
+				    $('body').animate({scrollTop:$('#five').offset().top},2000);
+				    }
+				});  
+    });
+  </script>
+     
+</body>
+</html>
