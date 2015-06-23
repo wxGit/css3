@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数值范围选择控件</title>
+	<style type="text/css">
+      #wrap{
+      	 width: 300px;
+      	 height: 15px;
+      	 border-radius: 7px;
+      	 border: 1px solid #eee;
+      	 position: relative;
+      	 left: 350px;
+      	 top: 250px;
+		 overflow:hidden;
+      }
+      #wrap .yel{
+      	 width: 298px;
+      	 height: 13px;
+      	 border-radius: 7px;
+      	 border: 1px solid #ddd;
+      	 position: absolute;
+      	 background: #EEC213;
+      }
+	  #wrap .yel_block{
+		 width:15px;
+		 height:15px;
+		 border-radius:7px;
+		 background:rgba(0,0,0,0.7);
+		 position:absolute;
+		 left:-1px;
+	  }
+	  #wrap .red{
+      	 width: 298px;
+      	 height: 13px;
+      	 border-radius: 7px;
+      	 border: 1px solid #ddd;
+      	 position: absolute;
+		 left:60px;
+      	 background: #B73D3D;
+      }
+	  #wrap .red_block{
+		 width:15px;
+		 height:15px;
+		 border-radius:7px;
+		 background:rgba(0,0,0,0.7);
+		 position:absolute;
+		 left:-1px;
+	  }
+	  #yel_p,#red_p{
+		 position:absolute;
+		 color:#666;
+	  }
+	  #yel_p input,#red_p input{
+		  width:24px;
+		  height:20px;
+		  text-align:center;
+		  line-height:20px;
+		  border:1px solid #EEC213;
+	  }
+	  #red_p{
+		  left:500px;
+		  top:320px;
+	  }
+      
+	</style>
+<script type="text/javascript" src="jquery-2.0.3.js"></script>
+<script>
+$(function(){
+	var percent = 0;
+   	var oYelDiv = $('#yel');
+	var oYelDivBlock = $('#yel_block');
+	var oDivBox = $('#wrap');
+	var oYelP = $('#yel_p');
+	
+	var oRedDiv = $('#red');
+	var oRedDivBlock = $('#red_block');
+	var oRedP = $('#red_p');
+	
+	oYelP.css({
+	  'left': oYelDiv.offset().left,
+	  'top': oYelDiv.offset().top - 48
+	});
+	
+	oRedP.css({
+	  'left': oRedDiv.offset().left,
+	  'top': oRedDiv.offset().top + 6
+	});
+	
+	percent = Math.floor(((oRedDiv.offset().left - oDivBox.offset().left -1)/(oDivBox.innerWidth() - oRedDivBlock.width()))*100);
+	
+	$('#redNum').val(percent);
+	
+	//黄色条
+	oYelDiv.bind('mousedown',function(e){
+	   var This = this;
+       if(e.target.className=='yel_block'){
+		   var disX = e.clientX - oYelDiv.offset().left+ oDivBox.offset().left;
+		   $(document).bind('mousemove',function(e){
+			  var l = e.clientX - disX;
+			  if(l<0){
+				 l=0;
+			  }else if(l>oDivBox.innerWidth()-oYelDivBlock.width()){
+				 l = oDivBox.innerWidth() - oYelDivBlock.width();
+			  }	
+			  
+			  var percent = Math.floor(((oYelDiv.offset().left - oDivBox.offset().left -1)/(oDivBox.innerWidth() - oYelDivBlock.width()))*100);
+			  
+			  oYelP.css({
+				 'left': oYelDiv.offset().left,
+				 'top': oYelDiv.offset().top -48
+			  });
+			  $('#yelNum').val(percent); 
+			  
+			  if(l > oRedDiv.offset().left - oDivBox.offset().left){
+			     l = oRedDiv.offset().left - oDivBox.offset().left;
+			  }
+			
+			  oYelDiv.css('left',l);
+			 
+		   });
+		   $(document).bind('mouseup',function(){
+			  $(document).unbind('mousemove');
+			  $(document).unbind('mouseup');
+		   });
+		   return false;
+	   }else{
+		   return;   
+	   }
+	});
+	
+	//红色条
+	oRedDiv.bind('mousedown',function(e){
+	   if($('#redNum').val()==$('#yelNum').val()){
+		  console.log('aa'); 
+	   }
+       if(e.target.className=='red_block'){
+		   var disX = e.clientX - oRedDiv.offset().left+ oDivBox.offset().left;
+		   $(document).bind('mousemove',function(e){
+			  
+			  var l = e.clientX - disX;
+			  if(l<0){
+				 l=0;
+			  }else if(l>oDivBox.innerWidth()-oRedDivBlock.width()){
+				 l = oDivBox.innerWidth() - oRedDivBlock.width();
+			  }	
+			  
+			  var percent = Math.floor(((oRedDiv.offset().left - oDivBox.offset().left -1)/(oDivBox.innerWidth() - oRedDivBlock.width()))*100);
+			  
+			  oRedP.css({
+				 'left': oRedDiv.offset().left,
+				 'top': oRedDiv.offset().top + 6
+			  });
+			  $('#redNum').val(percent); 
+			  
+			  if(l <= oYelDiv.offset().left - oDivBox.offset().left){
+			     l = oYelDiv.offset().left - oDivBox.offset().left;
+			  }
+			
+			  oRedDiv.css('left',l);
+			 
+		   });
+		   $(document).bind('mouseup',function(){
+			  $(document).unbind('mousemove');
+			  $(document).unbind('mouseup');
+		   });
+		   return false;
+	   }else{
+		   return;   
+	   }
+	});
+
+});
+
+</script>    
+</head>
+<body>
+	
+</body>
+<p id="yel_p"><input type="text" value="0" disabled id="yelNum"/>%为<input type="text" value="10"/>分钟内的平均错误率</p>
+<div id="wrap">
+	<div class="yel" id="yel">
+       <div class="yel_block" id="yel_block"></div>
+    </div>
+	<div class="red" id="red">
+       <div class="red_block" id="red_block"></div>
+    </div>
+</div>
+<p id="red_p"><input type="text" value="" disabled id="redNum"/>%为<input type="text" value="3"/>分钟内的平均错误率</p>
+</html>

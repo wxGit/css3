@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数值范围选择控件</title>
+	<style type="text/css">
+      #wrap{
+      	 width: 300px;
+      	 height: 15px;
+      	 border-radius: 7px;
+      	 border: 1px solid #ddd;
+      	 position: relative;
+		 left:200px;
+		 top:200px;
+		 overflow:hidden;
+      }
+      #wrap .yel{
+      	 width: 300px;
+      	 height: 17px;
+      	 border-radius: 7px;
+      	 border: 1px solid #ddd;
+      	 position: absolute;
+		 top:-1px;
+      	 background: #EEC213;
+      }
+	  #wrap .yel .yel_block{
+	     width:20px;
+		 height:17px;
+		 border-radius:7px;
+		 background:#09f;
+		 position:absolute;
+		 top:-1px;  
+	  }
+	  
+	  #wrap .red{
+      	 width: 300px;
+      	 height: 17px;
+      	 border-radius: 7px;
+      	 border: 1px solid #ddd;
+      	 position: absolute;
+		 top:-1px;
+		 left:40px;
+      	 background: #B73D3D;
+      }
+	  #wrap .red .red_block{
+	     width:20px;
+		 height:17px;
+		 border-radius:7px;
+		 background:red;
+		 position:absolute;
+		 top:-1px;
+	  }
+      
+	</style>
+<script type="text/javascript" src="jquery-2.0.3.js"></script>
+<script>
+window.onload=function ()
+{
+	var oDivYel=document.getElementById('yel');
+	var oDivBlockYel = document.getElementById('yel_block');
+	var oDivRed=document.getElementById('red');
+	var oDivBlockRed = document.getElementById('red_block');
+	var oDivBox = document.getElementById('wrap');
+	
+	scroll(oDivYel,oDivBlockYel,oDivBox);
+	scroll(oDivRed,oDivBlockRed,oDivBox);
+};
+
+function scroll(obj,objBlock,objBox){
+ 	obj.onmousedown=function (ev){
+		
+		var oEvent=ev||event;
+		if(oEvent.target.className == 'yel_block'||oEvent.target.className == 'red_block'){
+			var disX=oEvent.clientX-obj.offsetLeft;
+			
+			document.onmousemove=function (ev)
+			{
+				var oEvent=ev||event;
+				var l=oEvent.clientX-disX;
+				
+				if(l<0)
+				{
+				   l=0;
+				}else if(l>objBox.offsetWidth - objBlock.offsetWidth){
+				   l=objBox.offsetWidth - objBlock.offsetWidth;
+				}
+				
+				obj.style.left=l+'px';
+			};
+			
+			document.onmouseup=function ()
+			{
+				document.onmousemove=null;
+				document.onmouseup=null;
+			};
+			return false;
+		}else{
+		    return;	
+		}
+	};
+}
+</script>    
+</head>
+<body>
+	
+</body>
+<div id="wrap">
+	<div class="yel" id="yel">
+       <div class="yel_block" id="yel_block"></div>
+    </div>
+	<div class="red" id="red">
+       <div class="red_block" id="red_block"></div>
+    </div>
+</div>
+</html>
