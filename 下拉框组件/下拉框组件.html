@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>基于JQ下拉框组件正常开发</title>
+<style>
+*{
+	margin:0;
+	padding:0;
+}
+#dropdown{
+	margin:30px;
+}
+#dropdownMenu{
+	width:150px;
+	height:32px;
+	background:#fff;
+	border:1px solid #1ABC9C;
+	outline:none;
+	border-radius:4px;
+	cursor:pointer;
+	font-size:14px;
+	color:#666;
+}
+#dropdownContent{
+	width:150px;
+	height:auto;
+	border:1px solid #1ABC9C;
+	background:#F3F4F5;
+	border-radius:4px;
+	margin-top:3px;
+	display:none;
+}
+#dropdownContent .item{
+	list-style:none;
+	height:40px;
+	padding-left:13px;
+	line-height:40px;
+	cursor:pointer;
+	color:#666;
+}
+#dropdownContent .item img{
+	float:left;
+	margin-right:7px;
+	margin-top:4px;
+}
+#dropdownContent .item:hover{
+   background:#ccc;
+   color:#444;
+}
+</style>
+<script type="text/javascript" src="jquery-2.0.3.js"></script>
+<script>
+$(function(){
+   $('#dropdownMenu').click(function(){
+	  $('#dropdownContent').slideToggle();						 
+   });	
+   $('.item').click(function(){
+	  $('#dropdownContent').slideUp('fast');
+	  var itemTxt = $(this).find('span').html();
+	  $('#dropdownMenu span').eq(0).html(itemTxt);
+   });
+});
+</script>
+</head>
+
+<body>
+<div id="dropdown">
+      <button id="dropdownMenu">
+         <span>Dropdown</span>
+         <span class="caret"></span>
+      </button>
+      <ul id="dropdownContent">
+         <li class="item">
+            <img src="photos/1.png" />
+            <span>shaly</span>
+         </li>
+         <li class="item">
+            <img src="photos/2.png" />
+            <span>momo</span>
+         </li>
+         <li class="item">
+            <img src="photos/3.png" />
+            <span>safrai</span>
+         </li>
+         <li class="item">
+            <img src="photos/4.png" />
+            <span>hehe</span>
+         </li>
+         <li class="item">
+            <img src="photos/5.png" />
+            <span>memeda</span>
+         </li>
+         <li class="item">
+            <img src="photos/6.png" />
+            <span>caonima</span>
+         </li>
+      </ul>
+</div>
+</body>
+</html>

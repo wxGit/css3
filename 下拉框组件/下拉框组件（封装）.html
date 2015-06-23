@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>基于JQ下拉框组件正常开发</title>
+<style>
+*{
+	margin:0;
+	padding:0;
+}
+#dropdown{
+	position:relative;
+}
+#dropdownMenu{
+	width:100%;
+	background:#fff;
+	border:1px solid #1ABC9C;
+	outline:none;
+	border-radius:4px;
+	cursor:pointer;
+	font-size:14px;
+	color:#666;
+}
+#dropdownContent{
+	width:100%;
+	height:auto;
+	border:1px solid #1ABC9C;
+	background:#F3F4F5;
+	border-radius:4px;
+	margin-top:3px;
+	display:none;
+}
+#dropdownContent .item{
+	list-style:none;
+	height:40px;
+	padding-left:13px;
+	line-height:40px;
+	cursor:pointer;
+	color:#666;
+}
+#dropdownContent .item img{
+	float:left;
+	margin-right:7px;
+}
+#dropdownContent .item:hover{
+    background:#ccc;
+    color:#444;
+}
+</style>
+<script type="text/javascript" src="jquery-2.0.3.js"></script>
+<script>
+$(function(){
+   
+   var drop = new Dropdown();
+   drop.init('dropdown',{
+	   'menuWidth' : 150,
+	   'menuHeight' : 32,
+	   'itemHeight' : 40,
+	   'dropDownLeft' : 150,
+	   'dropDownTop' : 90,
+	   'arrList':[
+		  {'imgUrl':'photos/1.png','spanTxt':'shaly'},
+		  {'imgUrl':'photos/2.png','spanTxt':'momo'},
+		  {'imgUrl':'photos/3.png','spanTxt':'safrai'},
+		  {'imgUrl':'photos/4.png','spanTxt':'hehe'},
+		  {'imgUrl':'photos/5.png','spanTxt':'memeda'},
+		  {'imgUrl':'photos/6.png','spanTxt':'caonima'},
+		  {'imgUrl':'photos/7.png','spanTxt':'xixixi'},
+		  {'imgUrl':'photos/8.png','spanTxt':'xiang'},
+		  {'imgUrl':'photos/9.png','spanTxt':'javascript'}
+       ]
+   });
+   
+});
+
+function Dropdown(){
+   this.oBox = null;
+   this.oBtnMenu = null;
+   this.oUl = null;
+   this.aItem = null;
+   this.liSpan = null;
+   this.oLi = null;
+   this.innerHTML = null;
+   this.settings = {  //默认参数
+	  'menuWidth' : 120,
+	  'menuHeight' : 30,
+	  'itemHeight' : 40,
+	  'dropDownLeft' : 30,
+	  'dropDownTop' : 30
+   }
+}
+
+Dropdown.prototype.init = function(obj,opt){
+	$.extend(this.settings,opt);
+	this.oBox = $('#'+obj);
+	
+	this.innerHTML = $('<button id="dropdownMenu">'+
+         '<span>Dropdown</span>'+
+         '<span class="caret"></span>'+
+      '</button>'+
+      '<ul id="dropdownContent"></ul>');
+	this.oBox.append(this.innerHTML);
+	
+	this.oBtnMenu = $('#dropdownMenu');
+	this.oUl = $('#dropdownContent');
+	
+	for(var i=0;i<this.settings.arrList.length;i++){
+	  this.oLi = $('<li class="item">'+
+			 '<img src="'+ this.settings.arrList[i].imgUrl +'" width="32px" height="32px"/>'+
+			 '<span>'+ this.settings.arrList[i].spanTxt +'</span>'+
+		  '</li>');
+	  this.oUl.append(this.oLi);
+	}
+	
+	this.aItem = this.oUl.find('.item');
+	this.liSpan = this.aItem.find('span');
+	
+	this.oBox.css({
+	   'left': this.settings.dropDownLeft,
+	   'top': this.settings.dropDownTop
+	});
+	this.oBox.css({
+	   'width': this.settings.menuWidth			  
+	});
+	this.oBtnMenu.css({
+	   'height': this.settings.menuHeight
+	});
+	this.aItem.css({
+	   'height': this.settings.itemHeight
+	});
+	
+	this.comboBox();
+}
+
+Dropdown.prototype.comboBox = function(){
+	var This = this;
+    this.oBox.delegate(this.oBtnMenu,'click',function(){
+	   This.oUl.slideToggle('200');					 
+	});	
+	
+	this.aItem.on('click',function(){
+								   
+     This.oBtnMenu.find('span').eq(0).html($(this).find('span').html());							
+	
+	});
+}
+
+</script>
+</head>
+
+<body>
+<div id="dropdown">
+</div>
+</body>
+</html>
